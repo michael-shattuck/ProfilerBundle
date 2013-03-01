@@ -1,0 +1,27 @@
+{
+    "name": "clamidity/profiler-bundle",
+    "type": "symfony-bundle",
+    "description": "XHProf Bundle for Symfony",
+    "keywords": ["Developer tools", "XHProf"],
+    "homepage": "http://github.com/clamidity/ProfilerBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Shattuck",
+            "email": "ms2474@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": ">=2.1,<2.3-dev"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "*",
+        "symfony/yaml": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "Clamidity\\ProfilerBundle": "" }
+    },
+    "target-dir": "Clamidity/ProfilerBundle"
+}

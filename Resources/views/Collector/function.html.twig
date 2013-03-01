@@ -1,0 +1,190 @@
+{% extends 'ClamidityProfilerBundle:Collector:base.html.twig' %}
+
+{% block content %}
+<div class="hero-unit">
+    <h1>Clamidity Memory Usage Profiler</h1>
+
+    <p>Overall Summary</p>
+    
+    <p>Function Search</p>
+    <div>
+        <form action="{{ url }}" method="get">
+            <input type="hidden" name="run" value="{{ params.run }}" />
+            <input type="hidden" name="wts" value="{{ params.wts }}" />
+            <input type="hidden" name="sort" value="{{ params.sort }}" />
+            <input type="hidden" name="run1" value="{{ params.run1 }}" />
+            <input type="hidden" name="run2" value="{{ params.run2 }}" />
+            <input type="hidden" name="source" value="{{ params.source }}" />
+            <input type="hidden" name="all" value="{{ params.all }}" />
+            <input type="text" name="symbol" value="{{ params.symbol }}" class="span3" />
+            <p>
+                <button type="submit">Search for Function</button>
+            </p>
+        </form>
+    </div>
+</div>
+<div>
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('clamidity_profiler_profiler_index', {run:run}) }}">
+                View Index (100 Entries)
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('clamidity_profiler_profiler_index', {run:run, all:0}) }}">
+                View All
+            </a>
+        </li>
+        <li class="active">
+            <a href="#">
+                View Function - {{ function }}
+            </a>
+        </li>
+    </ul>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <th>
+                Function Name
+            </th>
+            <th>
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'wt'}) }}{{ squery }}">
+                    Incl. Wall Time<br>
+                    (microsec)
+                </a>
+            </th>
+            <th>
+                IWall%
+            </th>
+            <th>
+                
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'excl_wt'}) }}{{ squery }}">
+                    Excl. Wall Time<br>
+                    (microsec)
+                </a>
+            </th>
+            <th>
+                EWall%
+            </th>
+            <th>
+                
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'cpu'}) }}{{ squery }}">
+                    Incl. CPU<br>
+                    (microsecs)
+                </a>
+            </th>
+            <th>
+                ICpu%
+            </th>
+            <th>
+                
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'excl_cpu'}) }}{{ squery }}">
+                    Excl. CPU<br>
+                    (microsec)
+                </a>
+            </th>
+            <th>
+                ECPU%
+            </th>
+            <th>
+                
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'mu'}) }}{{ squery }}">
+                    Incl. MemUse<br>
+                    (bytes)
+                </a>
+            </th>
+            <th>
+                IMemUse%
+            </th>
+            <th>
+                
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'excl_mu'}) }}{{ squery }}">
+                    Excl. MemUse<br>
+                    (bytes)
+                </a>
+            </th>
+            <th>
+                EMemUse%
+            </th>
+            <th>
+                
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'pmu'}) }}{{ squery }}">
+                    Incl. PeakMemUse<br>
+                    (bytes)
+                </a>
+            </th>
+            <th>
+                IPeakMemUse%
+            </th>
+            <th>
+                
+                <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, sort:'excl_pmu'}) }}{{ squery }}">
+                    Excl. PeakMemUse<br>
+                    (bytes)
+                </a>
+            </th>
+            <th>
+                EPeakMemUse%
+            </th>
+        </thead>
+        <tbody>
+            {% for function in report.indFunctions %}
+                <tr>
+                    <td>
+                        <a href="{{ path('clamidity_profiler_profiler_function', {run:run, function:function, function:function.fn }) }}">
+                            {{ function.fn }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ function.wt }}
+                    </td>
+                    <td>
+                        {{ function.wtp }}
+                    </td>
+                    <td>
+                        {{ function.excl_wt }}
+                    </td>
+                    <td>
+                        {{ function.excl_wtp }}
+                    </td>
+                    <td>
+                        {{ function.cpu }}
+                    </td>
+                    <td>
+                        {{ function.cpup }}
+                    </td>
+                    <td>
+                        {{ function.excl_cpu }}
+                    </td>
+                    <td>
+                        {{ function.excl_cpup }}
+                    </td>
+                    <td>
+                        {{ function.mu }}
+                    </td>
+                    <td>
+                        {{ function.mup }}
+                    </td>
+                    <td>
+                        {{ function.excl_mu }}
+                    </td>
+                    <td>
+                        {{ function.excl_mup }}
+                    </td>
+                    <td>
+                        {{ function.pmu }}
+                    </td>
+                    <td>
+                        {{ function.pmup }}
+                    </td>
+                    <td>
+                        {{ function.excl_pmu }}
+                    </td>
+                    <td>
+                        {{ function.excl_pmup }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="xhprof_listener" class="Clamidity\ProfilerBundle\EventListener\RequestListener">
+            <tag name="kernel.event_listener" event="kernel.response" method="onCoreResponse" priority="-10000" />
+            <tag name="kernel.event_listener" event="kernel.request" method="onCoreRequest" priority="10000" />
+            <argument type="service" id="data_collector.xhprof" />
+        </service>
+        <service id="data_collector.xhprof" class="Clamidity\ProfilerBundle\DataCollector\XhprofCollector">
+            <tag name="data_collector" template="ClamidityProfilerBundle:Collector:xhprof.html.twig" id="xhprof" />
+            <argument type="service" id="service_container" />
+            <argument type="service" id="logger" on-invalid="null" />
+        </service>
+    </services>
+</container>

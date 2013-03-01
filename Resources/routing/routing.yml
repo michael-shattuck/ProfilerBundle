@@ -1,0 +1,11 @@
+clamidity_profiler_profiler_index:
+    pattern: /_memory_profiler/{run}/
+    defaults: { _controller: ClamidityProfilerBundle:Profiler:index }
+
+clamidity_profiler_profiler_function:
+    pattern: /_memory_profiler/{run}/function/{function}/
+    defaults: { _controller: ClamidityProfilerBundle:Profiler:function }
+
+clamidity_profiler_profiler_callgraph:
+    pattern: /_memory_profiler/{run}/callgraph/
+    defaults: { _controller: ClamidityProfilerBundle:Profiler:callgraph }

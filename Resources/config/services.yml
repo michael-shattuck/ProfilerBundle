@@ -1,0 +1,15 @@
+services:
+    data_collector.xhprof:
+        class: Clamidity\ProfilerBundle\DataCollector\XhprofCollector
+        arguments:
+            container: "@service_container"
+        tags:
+            - { name: data_collector, template: "ClamidityProfilerBundle:Collector:xhprof.html.twig", id: "xhprof" }
+
+    xhprof_listener:
+        class: Clamidity\ProfilerBundle\EventListener\RequestListener
+        arguments:
+            container: "@data_collector.xhprof"
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onCoreResponse, priority: -10000 }
+            - { name: kernel.event_listener, event: kernel.request, method: onCoreRequest, priority: 10000 }
