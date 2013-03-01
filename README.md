@@ -1,4 +1,4 @@
-ProfilerBundle
+Clamidity ProfilerBundle
 ==============
+Extended profiler for Symfony2 applications.
 
-Extended profiler for symfony2 applications.
